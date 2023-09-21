@@ -1,9 +1,17 @@
-import { fetchMovieTrands } from 'components/api';
-import { useEffect } from 'react';
+import { MovieTrends } from 'components/MovieTrends/MovieTrends';
+import { fetchMovieTrends } from 'components/api';
+import { useEffect, useState } from 'react';
 
 export const Home = () => {
+  const [trands, setTrands] = useState([]);
+
   useEffect(() => {
-    fetchMovieTrands().then(data => console.log(data));
+    fetchMovieTrends().then(data => setTrands(data.results));
   }, []);
-  return <div>HOME</div>;
+
+  return (
+    <div>
+      <MovieTrends movies={trands} />
+    </div>
+  );
 };

@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { fetchMovie } from 'components/api';
+import { useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const SingleMovie = () => {
   const params = useParams();
   const [movie, setMovie] = useState(null);
+  const location = useLocation();
+  const prevLocation = location.state?.from ?? '/';
 
   const generateMovieMarckup = movie => {
     if (!movie) {
@@ -12,6 +16,7 @@ const SingleMovie = () => {
     }
     return (
       <div>
+        <Link to={prevLocation}>Back</Link>
         <div>
           <img src="" alt="" />
         </div>
@@ -31,12 +36,7 @@ const SingleMovie = () => {
       .catch(err => console.log(err));
   }, [params.movieId]);
 
-  return (
-    <div>
-      SingleMovie {params.movieId}
-      {generateMovieMarckup(movie)}
-    </div>
-  );
+  return <div>{generateMovieMarckup(movie)}</div>;
 };
 
 export default SingleMovie;

@@ -5,7 +5,6 @@ import { SearchBar } from 'components/SearchBar/SearchBar';
 import { useSearchParams } from 'react-router-dom';
 
 const Movies = () => {
-  // const [query, setQuery] = useState('');
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query');
   const [movies, setMovies] = useState([]);
