@@ -19,7 +19,7 @@ export const fetchMovieReviews = async movieID => {
 };
 
 export const fetchMovieTrends = async () => {
-  const data = await fetch(`${BASE}trending/all/day?api_key=${API_KEY}`);
+  const data = await fetch(`${BASE}trending/all/week?api_key=${API_KEY}`);
   return await data.json();
 };
 export const fetchMovieByQuery = async query => {
