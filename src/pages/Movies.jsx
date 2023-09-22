@@ -3,6 +3,7 @@ import { fetchMovieByQuery } from 'components/api';
 import { useEffect, useState } from 'react';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { useSearchParams } from 'react-router-dom';
+import { PageWrapper } from './Home.styled';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -23,10 +24,10 @@ const Movies = () => {
   };
 
   return (
-    <>
+    <PageWrapper>
       <SearchBar onSearch={onSearch} />
       <SearchResults movies={movies} />
-    </>
+    </PageWrapper>
   );
 };
 export default Movies;

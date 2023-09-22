@@ -1,6 +1,7 @@
 import { MovieTrends } from 'components/MovieTrends/MovieTrends';
 import { fetchMovieTrends } from 'components/api';
 import { useEffect, useState } from 'react';
+import { PageWrapper } from './Home.styled';
 
 export const Home = () => {
   const [trands, setTrands] = useState([]);
@@ -10,8 +11,8 @@ export const Home = () => {
   }, []);
 
   return (
-    <div>
+    <PageWrapper>
       <MovieTrends movies={trands} />
-    </div>
+    </PageWrapper>
   );
 };
