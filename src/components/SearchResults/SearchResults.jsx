@@ -1,19 +1,32 @@
-import { Link } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
+import {
+  ImgThumb,
+  ResultsList,
+  ResultslistItem,
+} from './SearchResults.styled.js';
 
 export const SearchResults = ({ movies }) => {
   const location = useLocation();
   return (
-    <ul>
-      {movies.map(movie => {
+    <ResultsList>
+      {movies.map(({ id, poster_path, original_title }) => {
         return (
-          <li key={movie.id}>
-            <Link to={`${movie.id}`} state={{ from: location }}>
-              {movie.original_title}
+          <ResultslistItem key={id}>
+            <Link to={`${id}`} state={{ from: location }}>
+              <ImgThumb>
+                <img
+                  src={
+                    poster_path
+                      ? 'https://image.tmdb.org/t/p/w300' + poster_path
+                      : 'https://placehold.co/200x300'
+                  }
+                  alt={original_title}
+                />
+              </ImgThumb>
             </Link>
-          </li>
+          </ResultslistItem>
         );
       })}
-    </ul>
+    </ResultsList>
   );
 };

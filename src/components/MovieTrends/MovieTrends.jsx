@@ -1,20 +1,30 @@
-import { Link } from 'react-router-dom';
+import {
+  ImgThumb,
+  TrandsList,
+  StyledLink,
+  TrandlistItem,
+} from './MovieTrands.styled';
 
 export const MovieTrends = ({ movies }) => {
   return (
     <>
       <h1>Trending</h1>
-      <ul>
-        {movies.map(movie => {
+      <TrandsList>
+        {movies.map(({ id, poster_path, original_title }) => {
           return (
-            <li key={movie.id}>
-              <Link to={`movies/${movie.id}`}>
-                {movie.original_title ? movie.original_title : movie.name}
-              </Link>
-            </li>
+            <TrandlistItem key={id}>
+              <StyledLink to={`movies/${id}`}>
+                <ImgThumb>
+                  <img
+                    src={'https://image.tmdb.org/t/p/w300' + poster_path}
+                    alt={original_title}
+                  />
+                </ImgThumb>
+              </StyledLink>
+            </TrandlistItem>
           );
         })}
-      </ul>
+      </TrandsList>
     </>
   );
 };

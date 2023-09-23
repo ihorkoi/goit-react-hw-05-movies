@@ -20,6 +20,8 @@ const MovieDetails = () => {
     if (!movie) {
       return;
     }
+    const { poster_path, original_title, vote_average, overview, genres } =
+      movie;
     return (
       <Container>
         <Link
@@ -38,18 +40,22 @@ const MovieDetails = () => {
         <PageWrapper>
           <ImgThumb>
             <img
-              src={'https://image.tmdb.org/t/p/w300' + movie.poster_path}
-              alt="movie.original_title"
+              src={
+                poster_path
+                  ? 'https://image.tmdb.org/t/p/w300' + poster_path
+                  : 'https://placehold.co/200x300'
+              }
+              alt={original_title}
             />
           </ImgThumb>
           <div>
-            <h1>{movie.original_title}</h1>
-            <p>User rating: {Math.round(movie.vote_average * 1000) / 100}%</p>
+            <h1>{original_title}</h1>
+            <p>User rating: {Math.round(vote_average * 1000) / 100}%</p>
             <h2>Overview</h2>
-            <p>{movie.overview}</p>
+            <p>{overview}</p>
             <h2>Genres</h2>
             <ul>
-              {movie.genres?.map(({ name, id }) => {
+              {genres?.map(({ name, id }) => {
                 return <li key={id}>{name}</li>;
               })}
             </ul>
