@@ -1,18 +1,14 @@
 import { useLocation, Link } from 'react-router-dom';
-import {
-  ImgThumb,
-  ResultsList,
-  ResultslistItem,
-} from './SearchResults.styled.js';
+import { ImgThumb, ResultsList, ResultslistItem } from './MoviesList.styled.js';
 
-export const SearchResults = ({ movies }) => {
+export const MoviesList = ({ movies }) => {
   const location = useLocation();
   return (
     <ResultsList>
       {movies.map(({ id, poster_path, original_title }) => {
         return (
           <ResultslistItem key={id}>
-            <Link to={`${id}`} state={{ from: location }}>
+            <Link to={`/movies/${id}`} state={{ from: location }}>
               <ImgThumb>
                 <img
                   src={

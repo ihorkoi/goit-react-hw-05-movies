@@ -3,8 +3,7 @@ import { fetchMovieReviews } from '../api';
 import { useParams } from 'react-router-dom';
 
 export const Reviews = () => {
-  const params = useParams();
-  const { movieId } = params;
+  const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
   useEffect(() => {
     fetchMovieReviews(movieId).then(data => setReviews(data.results));

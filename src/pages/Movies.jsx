@@ -1,9 +1,10 @@
-import { SearchResults } from 'components/SearchResults/SearchResults';
 import { fetchMovieByQuery } from 'components/api';
 import { useEffect, useState } from 'react';
 import { SearchBar } from 'components/SearchBar/SearchBar';
 import { useSearchParams } from 'react-router-dom';
-import { PageWrapper } from './Home.styled';
+import { PageWrapper } from './Home/Home.styled';
+import { MoviesList } from 'components/MoviesList/MoviesList.jsx';
+import Notiflix from 'notiflix';
 
 const Movies = () => {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -14,19 +15,19 @@ const Movies = () => {
     if (!query) {
       return;
     }
-    fetchMovieByQuery(query).then(data => setMovies(data.results));
+    fetchMovieByQuery(query)
+      .then(data => setMovies(data.results))
+      .catch(err => Notiflix.Notify.failure(err.message));
   }, [query]);
 
-  const onSearch = evt => {
-    evt.preventDefault();
-    setSearchParams({ query: evt.target.elements.input.value });
-    evt.target.reset();
+  const onSearch = query => {
+    setSearchParams({ query: query });
   };
 
   return (
     <PageWrapper>
       <SearchBar onSearch={onSearch} />
-      <SearchResults movies={movies} />
+      <MoviesList movies={movies} />
     </PageWrapper>
   );
 };

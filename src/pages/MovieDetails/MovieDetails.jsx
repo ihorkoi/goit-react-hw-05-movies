@@ -9,9 +9,10 @@ import {
   BackButton,
   Genres,
 } from './MovieDetails.styled';
+import Notiflix from 'notiflix';
 
 const MovieDetails = () => {
-  const params = useParams();
+  const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const location = useLocation();
   const prevLocation = location.state?.from ?? '/';
@@ -78,10 +79,10 @@ const MovieDetails = () => {
     );
   };
   useEffect(() => {
-    fetchMovie(params.movieId)
+    fetchMovie(movieId)
       .then(data => setMovie(data))
-      .catch(err => console.log(err));
-  }, [params.movieId]);
+      .catch(err => Notiflix.Notify.failure(err.message));
+  }, [movieId]);
 
   return <div>{generateMovieMarckup(movie)}</div>;
 };

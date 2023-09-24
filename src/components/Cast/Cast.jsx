@@ -4,8 +4,7 @@ import { useParams } from 'react-router-dom';
 import { CastGallery, CastDescription } from './Cast.styled';
 
 export const Cast = () => {
-  const params = useParams();
-  const { movieId } = params;
+  const { movieId } = useParams();
   const [cast, setCast] = useState([]);
   useEffect(() => {
     fetchMovieCredits(movieId).then(data => setCast(data.cast));
